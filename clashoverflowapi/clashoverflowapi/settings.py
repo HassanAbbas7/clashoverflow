@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'clashoverflowapi.urls'
+AUTH_USER_MODEL = "api.CustomUser"
 
 TEMPLATES = [
     {
@@ -69,6 +72,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'clashoverflowapi.wsgi.application'
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ]
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
